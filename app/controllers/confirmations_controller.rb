@@ -3,7 +3,8 @@ class ConfirmationsController < ApplicationController
     @user = User.find_by(email: params[:user][:email].downcase)
 
     if @user.present? && @user.unconfirmed?
-      render json: { message: "Check your inbox for a confirmation email."}
+      @user.send_confirmation_email! 
+      render json: { message: "Invitation sent! Check your inbox for a confirmation email."}
     else
       render json: { message: "We could not find a user with that email address."}
     end
@@ -19,6 +20,5 @@ class ConfirmationsController < ApplicationController
       render json: { message: "Invalid token."}
     end
   end
-
 end
   
