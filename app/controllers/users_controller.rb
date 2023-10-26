@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :redirect_if_authenticated, only: [:create]
 
   def create 
     @user = User.new(user_params)

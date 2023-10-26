@@ -14,6 +14,7 @@ class ConfirmationsController < ApplicationController
 
     if @user.present?
       @user.confirm!
+      login @user
       render json: { message: "Your account has been confirmed."}
     else
       render json: { message: "Invalid token."}
