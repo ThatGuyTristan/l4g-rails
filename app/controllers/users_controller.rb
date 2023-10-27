@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   def create 
     @user = User.new(user_params)
     if @user.save
-      render json: { status: 200, message: "user saved"}
+      @user.send_confirmation_email!
+      render json: { status: 200, message: "Confirmation email sent"}
     else
       render json: { stauts: 500, message: "user not saved"}
     end
