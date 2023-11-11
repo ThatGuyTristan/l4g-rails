@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :redirect_if_authenticated, only: :create
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :authenticate_user!, only: [:update, :destroy]
+
+  # TODO: figure this out before we launch beta!!!
+  skip_forgery_protection only: :create
 
   def create 
     @user = User.new(create_user_params)

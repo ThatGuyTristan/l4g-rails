@@ -33,6 +33,10 @@ module Authentication
     cookies.permanent.encrypted[:remember_token] = user.remember_token
   end
 
+  def redirect_if_authenticated
+    redirect_to root_path, alert: "You are already logged in." if user_signed_in?
+  end
+
   private
 
   #not sure if cookie logic needs to be handled here or in the FE
@@ -45,6 +49,7 @@ module Authentication
   end
 
   def store_location
+    Rails.logger.debug "!!!! #{request.inspect}"
     session[:user_return_to] = request.original_url if request.get? && request.local?
   end
 

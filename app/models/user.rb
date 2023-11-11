@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  CONFIRMATION_TOKEN_EXPIRATION = 10.MINUTES
+  CONFIRMATION_TOKEN_EXPIRATION = 10.minutes
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
 
   MAILER_FROM_EMAIL = "no-reply@looking4group.com"
@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   before_save :downcase_email
 
-  has_many :active_sessions, dependant: :destroy
+  has_many :active_sessions, dependent: :destroy
 
   has_secure_password
   has_secure_token :remember_token
