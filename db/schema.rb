@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_02_185317) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_16_224535) do
   create_table "active_sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -21,6 +21,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_02_185317) do
   create_table "current", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "username"
+    t.string "headline"
+    t.string "timezone"
+    t.string "playstyle"
+    t.string "pfp_src"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
