@@ -62,7 +62,7 @@ class User < ApplicationRecord
       !has_attribute?(name) && has_attribute?("#{name}_digest")
     end.map(&:to_h)
 
-    if record == find_by(identifers)
+    if record = find_by(identifers)
       record if passwords.count { |name, value| record.public_send(:"authenticate_#{name}", value) == passwords.size}
     else
       new(passwords)

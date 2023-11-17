@@ -20,9 +20,10 @@ module Authentication
     reset_session
     active_session = user.active_sessions.create!
     session[:current_active_session_id] = active_session.id
+    session
   end
 
-  def logout
+  def logout(current_active_session_id)
     active_session = ActiveSession.find_by(id: session[:current_active_session_id])
     reset_session
     active_session.destroy! if active_session.present?
