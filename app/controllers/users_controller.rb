@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     else
       render json: { stauts: 500, message: "user not saved"}
     end
-  endtest
+  end
 
   private
   def user_params
