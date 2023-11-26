@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_202843) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "players", force: :cascade do |t|
+create_table "players", force: :cascade do |t|
     t.string "username"
     t.string "headline"
     t.string "timezone"

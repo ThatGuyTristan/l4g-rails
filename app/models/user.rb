@@ -5,10 +5,13 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  has_one :player
+
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
 
   def confirm!
     update_columns(confirmed_at: Time.current)
+    create_player
   end
 
   def confirmed?
@@ -22,6 +25,13 @@ class User < ApplicationRecord
   def unconfirmed?
     !confirmed?
   end 
+
+  def create_player
+    if !user.player
+      @player = Player.new(user_id: user.id)
+      @player.save!
+    end
+  end
 
   private
   def downcase_email
