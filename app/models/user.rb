@@ -70,6 +70,10 @@ class User < ApplicationRecord
     end
   end
 
+  def reconfirming?
+    unconfirmed_email.present?
+  end
+  
   def unconfirmed?
     !confirmed?
   end 

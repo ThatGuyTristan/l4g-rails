@@ -11,6 +11,10 @@ gem 'pry', '~> 0.14.2'
 
 # enables cross-domain requests
 gem 'rack-cors'
+
+# for sending emails and stuff
+gem 'mailgun-ruby', '~>1.2.12'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 

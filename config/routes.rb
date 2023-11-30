@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :confirmations, only: [:create, :update], param: :confirmation_token
+  resources :confirmations, only: [:create, :edit, :update], param: :confirmation_token
   resources :passwords, only: [:create, :update], param: :password_reset_token
 end
