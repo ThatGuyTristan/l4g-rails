@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_18_202843) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_04_194251) do
   create_table "active_sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -23,7 +23,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_202843) do
     t.datetime "updated_at", null: false
   end
 
-create_table "players", force: :cascade do |t|
+  create_table "games", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "release_date"
+    t.string "esrb_rating"
+    t.string "developer"
+    t.string "publisher"
+    t.string "genre"
+    t.integer "min_players"
+    t.integer "max_players"
+    t.integer "system_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["system_id"], name: "index_games_on_system_id"
+  end
+
+  create_table "players", force: :cascade do |t|
     t.string "username"
     t.string "headline"
     t.string "timezone"
@@ -34,6 +49,13 @@ create_table "players", force: :cascade do |t|
     t.integer "user_id"
     t.string "bio", limit: 500
     t.index ["user_id"], name: "index_players_on_user_id"
+  end
+
+  create_table "systems", force: :cascade do |t|
+    t.string "name"
+    t.string "manufacturer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,4 +71,5 @@ create_table "players", force: :cascade do |t|
   end
 
   add_foreign_key "active_sessions", "users", on_delete: :cascade
+  add_foreign_key "games", "systems", on_delete: :cascade
 end
