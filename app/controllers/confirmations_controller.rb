@@ -11,10 +11,12 @@ class ConfirmationsController < ApplicationController
   end
 
   def edit
-    @user = user.find_signed(params[:confirmation_token], purpose: :confirm_email)
+    Rails.logger.debug "FIRE AT WILL"
+    @user = User.find_signed(params[:confirmation_token], purpose: :confirm_email)
 
-    if @user.present?
+    if @user.present? && @user.unconfirmed_or_reconfirming?
       @user.confirm!
+      login @user
       render json: { message: "Your account has been confirmed."}
     else
       render json: { message: "Invalid token."}
