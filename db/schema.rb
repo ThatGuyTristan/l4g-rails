@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_04_194251) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_04_195531) do
   create_table "active_sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -49,6 +49,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_04_194251) do
     t.integer "user_id"
     t.string "bio", limit: 500
     t.index ["user_id"], name: "index_players_on_user_id"
+  end
+
+  create_table "players_games", id: false, force: :cascade do |t|
+    t.integer "game_id", null: false
+    t.integer "player_id", null: false
+    t.index ["game_id", "player_id"], name: "index_players_games_on_game_id_and_player_id"
+    t.index ["player_id", "game_id"], name: "index_players_games_on_player_id_and_game_id"
   end
 
   create_table "systems", force: :cascade do |t|
