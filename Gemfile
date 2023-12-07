@@ -9,6 +9,9 @@ gem "rails", "~> 7.0.5"
 # for debugging
 gem 'pry', '~> 0.14.2'
 
+# for faking stuff
+gem 'faker'
+
 # enables cross-domain requests
 gem 'rack-cors'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
