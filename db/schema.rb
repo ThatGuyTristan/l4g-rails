@@ -38,6 +38,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_04_195531) do
     t.index ["system_id"], name: "index_games_on_system_id"
   end
 
+  create_table "player_games", id: false, force: :cascade do |t|
+    t.integer "game_id", null: false
+    t.integer "player_id", null: false
+    t.index ["game_id", "player_id"], name: "index_player_games_on_game_id_and_player_id"
+    t.index ["player_id", "game_id"], name: "index_player_games_on_player_id_and_game_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "username"
     t.string "headline"
@@ -49,13 +56,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_04_195531) do
     t.integer "user_id"
     t.string "bio", limit: 500
     t.index ["user_id"], name: "index_players_on_user_id"
-  end
-
-  create_table "players_games", id: false, force: :cascade do |t|
-    t.integer "game_id", null: false
-    t.integer "player_id", null: false
-    t.index ["game_id", "player_id"], name: "index_players_games_on_game_id_and_player_id"
-    t.index ["player_id", "game_id"], name: "index_players_games_on_player_id_and_game_id"
   end
 
   create_table "systems", force: :cascade do |t|

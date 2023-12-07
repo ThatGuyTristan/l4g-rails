@@ -1,29 +1,21 @@
 class User < ApplicationRecord
   CONFIRMATION_TOKEN_EXPIRATION = 10.minutes
-<<<<<<< HEAD
-=======
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
 
   MAILER_FROM_EMAIL = "no-reply@looking4group.com"
 
   attr_accessor :current_password
->>>>>>> development
 
   before_save :downcase_email
 
   has_many :active_sessions, dependent: :destroy
-
-<<<<<<< HEAD
   has_one :player
 
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
-=======
   has_secure_password
   has_secure_token :remember_token
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true, uniqueness: true
   validates :unconfirmed_email, format: {with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
->>>>>>> development
 
   def confirm!
     if unconfirmed_or_reconfirming?
@@ -31,13 +23,10 @@ class User < ApplicationRecord
         return false unless update(email: unconfirmed_email, unconfirmed_email: nil)
       end
     update_columns(confirmed_at: Time.current)
-<<<<<<< HEAD
-    create_player
-=======
+    create_player(user)
     else
       false
     end
->>>>>>> development
   end
 
   def confirmed?
@@ -87,16 +76,15 @@ class User < ApplicationRecord
     !confirmed?
   end 
 
-<<<<<<< HEAD
-  def create_player
+  def create_player(user)
     if !user.player
-      @player = Player.new(user_id: user.id)
+      @player = Player.new(user_id: user.id, username: user.email)
       @player.save!
     end
-=======
+  end
+
   def unconfirmed_or_reconfirming?
     unconfirmed? || reconfirming? 
->>>>>>> development
   end
 
   private
