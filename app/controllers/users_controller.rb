@@ -1,13 +1,10 @@
 class UsersController < ApplicationController
-<<<<<<< HEAD
-=======
   before_action :redirect_if_authenticated, only: :create
   before_action :authenticate_user!, only: [:update, :destroy]
 
   # TODO: figure this out before we launch beta!!!
   skip_forgery_protection only: :create
 
->>>>>>> development
   def create 
     @user = User.new(create_user_params)
     if @user.save
@@ -18,15 +15,10 @@ class UsersController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   def show
     @user = User.find_by(id: params[:user][:id])
     render json: { id: @user.id, confirmed: @user.confirmed_at ? 1 : 0, email: @user.email }
-=======
-  # will be handled on the front end
-  # def edit
-  #   @user = current_user
-  # end
+  end
 
   def destroy
     current_user.destroy
@@ -49,7 +41,6 @@ class UsersController < ApplicationController
     else
       render json: { message: "incorrect password" } 
     end
->>>>>>> development
   end
 
   private

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "players/:id", to: "players#show" 
   post "players/:id", to: "players#edit"
 
+  get "player_games/:player_id", to: "player_games#index" 
+  delete "player_games", to: "player_games#delete"
+
   post "login", to: "sessions#create"
   post "logout", to: "sessions#destroy"
 

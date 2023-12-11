@@ -14,6 +14,7 @@ gem 'faker'
 
 # enables cross-domain requests
 gem 'rack-cors'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
