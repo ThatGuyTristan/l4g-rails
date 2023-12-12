@@ -1,12 +1,17 @@
 class PlayerGamesController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
-    return unless params[:player_id]
     games ||= PlayerGame.includes(:game).where(player_id: params[:player_id])
     render json: { games: player_games(games)}
   end
 
   def create
-    PlayerGame.create(player_id: params[:player_id], game_id: params[:game_id])
+    player_game = PlayerGame.create(player_id: params[:player_id], game_id: params[:game_id])
+    
+    if player_game.save!
+      render json: { message: "#{player_game.game.name} added to your list"}
+    end
   end
 
   def delete
