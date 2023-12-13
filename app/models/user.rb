@@ -9,6 +9,7 @@ class User < ApplicationRecord
   before_save :downcase_email
 
   has_many :active_sessions, dependent: :destroy
+  has_one :player
 
   has_secure_password
   has_secure_token :remember_token
@@ -22,6 +23,7 @@ class User < ApplicationRecord
         return false unless update(email: unconfirmed_email, unconfirmed_email: nil)
       end
     update_columns(confirmed_at: Time.current)
+    create_player(user)
     else
       false
     end
@@ -73,6 +75,13 @@ class User < ApplicationRecord
   def unconfirmed?
     !confirmed?
   end 
+
+  def create_player(user)
+    if !user.player
+      @player = Player.new(user_id: user.id, username: user.email)
+      @player.save!
+    end
+  end
 
   def unconfirmed_or_reconfirming?
     unconfirmed? || reconfirming? 

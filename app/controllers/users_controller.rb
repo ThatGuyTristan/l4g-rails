@@ -15,10 +15,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # will be handled on the front end
-  # def edit
-  #   @user = current_user
-  # end
+  def show
+    @user = User.find_by(id: params[:user][:id])
+    render json: { id: @user.id, confirmed: @user.confirmed_at ? 1 : 0, email: @user.email }
+  end
 
   def destroy
     current_user.destroy
