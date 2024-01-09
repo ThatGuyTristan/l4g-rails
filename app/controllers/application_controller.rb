@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Authentication
 
-  def render_success(data)
+  def render_success(data={})
     render json: data, status: 200
   end
 
