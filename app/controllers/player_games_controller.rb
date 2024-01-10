@@ -15,9 +15,12 @@ class PlayerGamesController < ApplicationController
   end
 
   def delete
-    game_id = PlayerGame.find_by(player_id: params[:player_id], game_id: params[:game_id]).pluck(:id)
-    Rails.logger.debug "#GAME #{game_id}"
-    game.destroy(game_id)
+    game = PlayerGame.find_by(player_id: params[:player_id], game_id: params[:game_id])
+    if game.destroy!
+      render_success
+    else
+      render_error("could not delete") 
+    end
   end
 
   # TODO: Clean this up, works as a sfd
