@@ -1,7 +1,8 @@
 class Player < ApplicationRecord
   belongs_to :user
 
-  has_and_belongs_to_many :games, :join_table => :player_games
+  has_many :player_games
+  has_many :games, :through => :player_games
   has_many :systems
   
   scope :public_profile, -> { where(public: true) }

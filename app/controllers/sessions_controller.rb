@@ -11,14 +11,13 @@ class SessionsController < ApplicationController
     if !@user 
       render json: { message: "Incorrect email or password", status: 400}
     end
-    # password ?????? 
 
     if @user.unconfirmed?
       render json: { message: "User account unconfirmed.", status: 200 }
     elsif @user.authenticate(params[:user][:password])
       token = login @user
       remember(@user) if params[:user][:remember_me] == 1
-      render json: { message: "Login successful", status: 200, token: token }
+      render json: { message: "Login successful", status: 200, token: token, player: @user.player }
     else
       render json: { message: "Incorrect email or password", status: 400 }
     end
