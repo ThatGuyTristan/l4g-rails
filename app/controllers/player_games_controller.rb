@@ -17,9 +17,9 @@ class PlayerGamesController < ApplicationController
   def delete
     game = PlayerGame.find_by(player_id: params[:player_id], game_id: params[:game_id])
     if game.destroy!
-      render_success("#{game.name} removed from your list")
+      render_success("Removed from your list")
     else
-      render_error("Could not remove #{game.name} from your list") 
+      render_error("Could not remove from your list") 
     end
   end
 
