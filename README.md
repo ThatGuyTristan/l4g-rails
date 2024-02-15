@@ -1,6 +1,1 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-* ...
+This repo has been moved to the graveyard since we are moving out backend for l4g to Supabase.
