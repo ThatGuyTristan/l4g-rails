@@ -1,1 +1,1 @@
-This repo has been moved to the graveyard since we are moving out backend for l4g to Supabase.
+This repo has been moved to the graveyard since we are moving our backend for Ellefgy to Supabase.
